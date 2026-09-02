@@ -6,7 +6,7 @@ public class Program
     {
         //Console.WriteLine(IsPalindrome("    Race Car   "));
 
-        IsNeilNumber(12345678);
+        //IsNeilNumber(12345678);
     }
 
     /***
