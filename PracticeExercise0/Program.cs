@@ -4,9 +4,9 @@ public class Program
 {
     static void Main(string[] args)
     {
-        //Console.WriteLine(IsPalindrome("    Race Car   "));
+        Console.WriteLine(IsPalindrome("    Race Car   "));
 
-        //IsNeilNumber(12345678);
+        IsNeilNumber(12345678);
     }
 
     /***
@@ -16,7 +16,30 @@ public class Program
     */
     public static bool IsPalindrome(string s)
     {
-        return false;
+        int left = 0;
+        int right = s.Length - 1;
+
+        while (left < right)
+        {
+                while (s[left] == ' ')
+            {
+                left++;
+            }
+
+            while (s[right] == ' ')
+            {
+                right--;
+            }
+            
+            if (char.ToLower(s[left]) != char.ToLower(s[right]))
+            {
+                return false;
+            }
+            left++;
+            right--;
+        } 
+
+        return true;
     }
 
 
@@ -29,7 +52,19 @@ public class Program
      */
     public static int ReverseInt(int i)
     {
-        return i;
+        int sign = i < 0 ? -1 : 1;
+        int number = Math.Abs(i);
+        int reverse = 0;
+
+        while (number > 0)
+        {
+         int digit = number % 10;
+         reverse = reverse * 10 + digit;
+         number /= 10;   
+        }
+
+        return reverse * sign;
+
     }
 
 
@@ -40,11 +75,31 @@ public class Program
      * This comparison should be case INsensitive and ignore spaces.
      */
     public static bool IsUnique(string s)
-    {
+    { for (int i = 0; i < s.Length; i++)
+        {
+            if (!char.IsLetter(s[i]))
+            {
+                continue;
+            }
+            
+            for(int j = i + 1; j < s.Length; j++)
+            {
+                if (!char.IsLetter(s[j]))
+                {
+                    continue;
+                }
 
+                if (char.ToLower(s[i]) == char.ToLower(s[j]))
+                {
+                    return false;
+                }
+
+            }   
+        }
 
         return true;
     }
+
 
 
     /***
@@ -55,8 +110,48 @@ public class Program
      */
     public static bool IsNeilNumber(int i)
     {
-        return true;
+        if (i < 0)
+        {
+            return false;
+        }
+
+        int original = i;
+        int numberOfDigits = 0;
+        int temporary = i;
+
+        if (temporary == 0)
+        {
+            numberOfDigits = 1;
+        }
+        else
+        {
+            while (temporary > 0)
+            {
+                numberOfDigits++;
+                temporary /= 10;
+            }
+        }
+
+        int sum = 0;
+        temporary = i;
+
+        while (temporary > 0)
+        {
+            int digit = temporary % 10;
+            int power = 1;
+
+            for (int count = 0; count < numberOfDigits; count++)
+            {
+                power *= digit;
+            }
+
+            sum += power;
+            temporary /= 10;
+        }
+
+        return sum == original;
     }
+
 
     /***
      * 
@@ -67,7 +162,19 @@ public class Program
      */
     public static string Convert(string s)
     {
-        return null;
+        s = s.Replace("zero", "0");
+        s = s.Replace("one", "1");
+        s = s.Replace("two", "2");
+        s = s.Replace("three", "3");
+        s = s.Replace("four", "4");
+        s = s.Replace("five", "5");
+        s = s.Replace("six", "6");
+        s = s.Replace("seven", "7");
+        s = s.Replace("eight", "8");
+        s = s.Replace("nine", "9");
+
+        return s;
+        
     }
 
 }
